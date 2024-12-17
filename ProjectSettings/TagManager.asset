@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Line
   - Drawable
+  - TableColumn
   layers:
   - Default
   - TransparentFX
