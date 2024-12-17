@@ -85,6 +85,7 @@ public class CroquisScript : MonoBehaviour
         rectTransform.localPosition = mousePosition;
     }
 
+    //Fonctions pour l'eventTrigger
     public void InCroquis()
     {
         estDansCroquis = true;
