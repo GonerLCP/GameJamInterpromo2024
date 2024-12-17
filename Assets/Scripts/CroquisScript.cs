@@ -9,9 +9,20 @@ using UnityEngine.EventSystems;
 public class CroquisScript : MonoBehaviour
 {
     public bool estSurCadre;
+    public bool estDansCroquis;
+    private RectTransform rectTransform;
+    private Canvas canvas;
+
+
+    private void Start()
+    {
+        rectTransform = GetComponent<RectTransform>();
+        canvas = GetComponentInParent<Canvas>();
+    }
     void Update()
     {
         DetectUIElement();
+        MoveObject();
     }
 
     void DetectUIElement()
@@ -56,4 +67,31 @@ public class CroquisScript : MonoBehaviour
         }
     }
 
+    void MoveObject()
+    {
+        if (!estDansCroquis) { return; }
+        if(!Input.GetMouseButton(1)) { return; }
+        Vector2 mousePosition;
+
+        // Convertit la position de la souris dans l'espace du RectTransform parent
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            rectTransform.parent as RectTransform,
+            Input.mousePosition,
+            canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : Camera.main,
+            out mousePosition
+        );
+
+        // Met à jour la position de l'image
+        rectTransform.localPosition = mousePosition;
+    }
+
+    public void InCroquis()
+    {
+        estDansCroquis = true;
+    }
+
+    public void OutCroquis()
+    {
+        estDansCroquis = false;
+    }
 }
