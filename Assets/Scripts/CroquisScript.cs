@@ -13,6 +13,7 @@ public class CroquisScript : MonoBehaviour
     private RectTransform rectTransform;
     private Canvas canvas;
 
+    public bool estAttrape = false;
 
     private void Start()
     {
@@ -70,8 +71,9 @@ public class CroquisScript : MonoBehaviour
     void MoveObject()
     {
         if (!estDansCroquis) { return; }
-        if(!Input.GetMouseButton(1)) { return; }
+        if(!Input.GetMouseButton(1)) { estAttrape = false; return; }
         Vector2 mousePosition;
+        estAttrape = true;
 
         // Convertit la position de la souris dans l'espace du RectTransform parent
         RectTransformUtility.ScreenPointToLocalPointInRectangle(

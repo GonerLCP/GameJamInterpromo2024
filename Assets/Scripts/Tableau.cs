@@ -7,23 +7,20 @@ public class Tableau : MonoBehaviour
     public int maxNumberOfColumns = 10;
     public Button addColumnButton;
 
-    private List<GameObject> columns = new List<GameObject>();
+    public List<GameObject> columns = new List<GameObject>();
 
     void Start()
     {
-        columns.Add(GetComponentInChildren<VerticalLayoutGroup>().gameObject);
         columns[0].GetComponentInChildren<Button>().interactable = false;
     }
 
     // Update is called once per frame
-    public void TryToDeleteColumn(Button buttonInstance)
+    public void TryToDeleteColumn(GameObject column)
     {
-        GameObject column = buttonInstance.GetComponentInParent<VerticalLayoutGroup>().gameObject;
-
         if (columns.Count > 1)
         {
-            Destroy(column);
             columns.Remove(column);
+            Destroy(column);
             addColumnButton.interactable = true;
 
             if (columns.Count == 1)

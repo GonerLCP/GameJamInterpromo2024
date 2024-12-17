@@ -7,6 +7,8 @@ TagManager:
   - Line
   - Drawable
   - TableColumn
+  - Croquis
+  - TableCell
   layers:
   - Default
   - TransparentFX
