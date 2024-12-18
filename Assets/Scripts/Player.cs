@@ -6,19 +6,27 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.EventSystems;
 using Unity.VisualScripting;
+using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
 
 public class Player : MonoBehaviour
 {
     private GameObject croquis;
     public bool estAttrape, estAttrapeTampon;
     private bool surLeCadreDrop;
+    public bool peutGrab;
+    public GameObject target;
     public Canvas canvas;
     private Vector2 offset;
     public Vector3 coordTP;
-
+    public Button btn;
+    [SerializeField]
+    private Button[] buttons;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        peutGrab = false;
+        SetAllButtonsInteractable();
     }
 
     // Update is called once per frame
@@ -68,7 +76,60 @@ public class Player : MonoBehaviour
             }
             if (surLeCadreDrop == false)//On sait que c'est nul part on tp sur tpcoord, arbitrairement mis à une valeur dans l'éditeur
             {
-                croquis.GetComponent<RectTransform>().anchoredPosition = coordTP;
+                if (surLeCadreDrop == false) // Si l'objet n'est sur aucun cadre, on le téléporte
+                {
+                    if (croquis == null || target == null) return;
+
+                    Vector2 moveTo;
+
+                    // Étape 1 : Position cible en espace écran
+                    Vector3 screenPoint = Camera.main.WorldToScreenPoint(target.transform.position);
+
+                    // Étape 2 : Canevas racine
+                    RectTransform canvasRectTransform = canvas.transform as RectTransform;
+
+                    // Étape 3 : Convertir en espace local du canevas racine
+                    bool validPoint = RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                        canvasRectTransform,
+                        screenPoint,
+                        canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : Camera.main,
+                        out moveTo
+                    );
+
+                    if (!validPoint)
+                    {
+                        Debug.LogError("La conversion de la position a échoué !");
+                        return;
+                    }
+
+                    Debug.Log($"Local Point in Canvas: {moveTo}");
+
+                    // Étape 4 : Ajuster l'espace local pour l'objet croquis
+                    RectTransform croquisParent = croquis.transform.parent as RectTransform;
+
+                    if (croquisParent != null)
+                    {
+                        // Convertir du canevas racine à l'espace local du parent de croquis
+                        Vector3 worldPosition = canvasRectTransform.TransformPoint(moveTo);
+                        Vector2 localPointInCroquisParent;
+
+                        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                            croquisParent,
+                            Camera.main.WorldToScreenPoint(worldPosition),
+                            canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : Camera.main,
+                            out localPointInCroquisParent
+                        );
+
+                        // Appliquer la position dans l'espace local du parent de croquis
+                        croquis.GetComponent<RectTransform>().anchoredPosition = localPointInCroquisParent;
+
+                        Debug.Log($"Position dans le parent de croquis : {localPointInCroquisParent}");
+                    }
+                    else
+                    {
+                        Debug.LogError("Croquis n'a pas de parent RectTransform !");
+                    }
+                }
             }
         }
         estAttrapeTampon = estAttrape;
@@ -76,7 +137,7 @@ public class Player : MonoBehaviour
     void MoveObject()
     {
         if (croquis == null) return;
-        if (!Input.GetMouseButton(1)) { estAttrape = false; return; }
+        if (!Input.GetMouseButton(0) || !peutGrab) { estAttrape = false; return; }
         croquis.transform.SetAsLastSibling();
         Vector2 mousePosition;
         estAttrape = true;
@@ -128,5 +189,35 @@ public class Player : MonoBehaviour
 
         // Réinitialise si aucun objet correspondant n'est trouvé
         croquis = null;
+    }
+
+    public void OnButtonClicked(Button clickedButton)
+    {
+        int buttonIndex = System.Array.IndexOf(buttons, clickedButton);
+
+        if (buttonIndex == -1)
+            return;
+
+        SetAllButtonsInteractable();
+
+        clickedButton.interactable = false;
+    }
+
+    public void SetAllButtonsInteractable()
+    {
+        foreach (Button button in buttons)
+        {
+            button.interactable = true;
+        }
+    }
+
+    public void ClickButtonGrab()
+    {
+        peutGrab = true;
+    }
+
+    public void ClickButtonDrawAndEreaser()
+    {
+        peutGrab = false;
     }
 }

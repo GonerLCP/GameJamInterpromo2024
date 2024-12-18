@@ -11,17 +11,27 @@ public class LineGenerator : MonoBehaviour
 {
     public GameObject linePrefab;
 
-    public bool dansLeCadre, dansLeCroquis, bouttonPresser;
+    public bool dansLeCadre, dansLeCroquis, peutDessiner, peutEffacer;
 
     Line activeLine;
 
     private GameObject croquis;
 
+    private GameObject lineDrawn;
+
+    public float clickThreshold = 5f;
+
+    private void Start()
+    {
+        peutDessiner = false; peutEffacer = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
         GetCroquisScript();
-        DessinLigne();
+        if (peutDessiner){ DessinLigne(); }
+        if (peutEffacer) { EffacerLigne(); }
     }
 
     private void GetCroquisScript()
@@ -41,6 +51,7 @@ public class LineGenerator : MonoBehaviour
         croquis = null;
         dansLeCadre = false;
         dansLeCroquis = false;
+        lineDrawn = null;
         foreach (var result in uiResults)
         {
             if (result.gameObject.name == "Cadre")
@@ -52,12 +63,16 @@ public class LineGenerator : MonoBehaviour
                 dansLeCroquis = true;
                 croquis = result.gameObject;
             }
+            if (result.gameObject.CompareTag("Line"))
+            {
+                lineDrawn = result.gameObject;
+            }
         }
     }
     private void DessinLigne()
     {
         //Trace la ligne si l'on est bien sur le croquis
-        if (Input.GetMouseButtonDown(0) && dansLeCadre == true)
+        if (Input.GetMouseButtonDown(0) && dansLeCadre && peutDessiner == true)
         {
             GameObject newLine = Instantiate(linePrefab);
             activeLine = newLine.GetComponent<Line>();
@@ -77,8 +92,61 @@ public class LineGenerator : MonoBehaviour
             activeLine.Updateline(mousePos);
         }
     }
-    public void ClickButton()
+
+    //entierement fait sous chatgpt, j'ai give up, je suis une merde, faut un threshold un peu grand genre 5
+    private void EffacerLigne()
     {
-        bouttonPresser = true;
+        if (Input.GetMouseButton(0) && dansLeCadre && peutEffacer)
+        {
+            Vector2 mousePosition = Input.mousePosition; // Position de la souris en pixels
+            LineRenderer[] lineRenderers = FindObjectsOfType<LineRenderer>(); // Trouve tous les LineRenderers
+
+            foreach (LineRenderer lineRenderer in lineRenderers)
+            {
+                for (int i = 0; i < lineRenderer.positionCount - 1; i++)
+                {
+                    // Récupère les points du LineRenderer en espace écran
+                    Vector3 screenPoint1 = RectTransformUtility.WorldToScreenPoint(Camera.main, lineRenderer.GetPosition(i));
+                    Vector3 screenPoint2 = RectTransformUtility.WorldToScreenPoint(Camera.main, lineRenderer.GetPosition(i + 1));
+
+                    // Vérifie si la souris est proche d'un segment
+                    if (DistanceFromPointToSegment(mousePosition, screenPoint1, screenPoint2) <= clickThreshold)
+                    {
+                        Debug.Log($"Clicked on {lineRenderer.name}");
+                        Destroy(lineRenderer.gameObject); // Détruit le GameObject associé au LineRenderer
+                        return;
+                    }
+                }
+            }
+        }
+    }
+    float DistanceFromPointToSegment(Vector2 point, Vector2 segmentStart, Vector2 segmentEnd)
+    {
+        // Calcul de la projection
+        Vector2 line = segmentEnd - segmentStart;
+        Vector2 toPoint = point - segmentStart;
+
+        float t = Mathf.Clamp01(Vector2.Dot(toPoint, line) / line.sqrMagnitude);
+        Vector2 projection = segmentStart + t * line;
+
+        // Retourne la distance entre la souris et la projection
+        return Vector2.Distance(point, projection);
+    }
+    public void ClickButtonDraw()
+    {
+        peutDessiner = true;
+        peutEffacer = false;
+    }
+
+    public void ClickButtonEreaser()
+    {
+        peutDessiner = false;
+        peutEffacer = true;
+    }
+
+    public void clickButtonGrab()
+    {
+        peutDessiner = false;
+        peutEffacer = false;
     }
 }
