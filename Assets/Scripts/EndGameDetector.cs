@@ -6,6 +6,7 @@ public class EndGameDetector : MonoBehaviour
     public CroquisScript[] croquisArray = new CroquisScript[14];
     public float croquisLerpDuration = 2f;
     public GameObject rucheFinale;
+    public SFX audioSource;
 
     private bool tousLesCroquisSontSurLeCalque = true;
     private bool endHasBeenCalled = false;
@@ -87,6 +88,7 @@ public class EndGameDetector : MonoBehaviour
 
         // Appeler la fonction
         EndGame();
+        audioSource.playBeehive();
     }
 
     private void EndGame()

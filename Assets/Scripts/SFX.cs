@@ -6,6 +6,8 @@ public class SFX : MonoBehaviour
     public AudioClip deleteColumn;
     public AudioClip croquisCategorized;
     public AudioClip croquisBackToCadre;
+    public AudioClip beehive;
+    public AudioClip inputField;
 
     private AudioSource source;
 
@@ -29,5 +31,14 @@ public class SFX : MonoBehaviour
     public void playCroquisBackToCadre()
     {
         source.PlayOneShot(croquisBackToCadre);
+    }
+
+    public void playBeehive()
+    {
+        source.PlayOneShot(beehive);
+    }
+    public void playInputField()
+    {
+        source.PlayOneShot(inputField);
     }
 }
