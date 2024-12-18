@@ -46,5 +46,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: ruche
+    uniqueID: 1301649973
+    locked: 0
+  - name: blackBG
+    uniqueID: 686011277
+    locked: 0
   m_RenderingLayers:
   - Default

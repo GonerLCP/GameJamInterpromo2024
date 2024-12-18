@@ -95,6 +95,8 @@ public class EndGameDetector : MonoBehaviour
     {
         GameObject rucheFinaleInstance = Instantiate(rucheFinale);
         rucheFinaleInstance.transform.position = croquisArray[0].transform.position;
+        rucheFinaleInstance.GetComponentInChildren<Canvas>().worldCamera = Camera.main;
+        rucheFinaleInstance.GetComponentInChildren<Canvas>().sortingLayerName = "ruche";
 
 
         foreach (CroquisScript croquis in croquisArray)
