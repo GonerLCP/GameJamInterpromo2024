@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      button_Gomme-22_0: 1708108528114892317
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

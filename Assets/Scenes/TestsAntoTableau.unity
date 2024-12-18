@@ -188,6 +188,10 @@ PrefabInstance:
       value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 7784503417657385105, guid: 4cc7700c936487345a8109b96ad96303, type: 3}
+      propertyPath: listeCroquis
+      value: 
+      objectReference: {fileID: 520449363}
+    - target: {fileID: 7784503417657385105, guid: 4cc7700c936487345a8109b96ad96303, type: 3}
       propertyPath: buttons.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -1390,11 +1394,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7945424149395986364, guid: 94c3132b515aac1468a6eb3321d1b0af, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 509.34
+      value: 509.33997
       objectReference: {fileID: 0}
     - target: {fileID: 7945424149395986364, guid: 94c3132b515aac1468a6eb3321d1b0af, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 509.34
+      value: 509.33997
       objectReference: {fileID: 0}
     - target: {fileID: 7945424149395986364, guid: 94c3132b515aac1468a6eb3321d1b0af, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2320,7 +2324,15 @@ PrefabInstance:
       value: -457.985
       objectReference: {fileID: 0}
     - target: {fileID: 5014106019469587897, guid: 380048e9f1c2b194e8e36201c9df1bad, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014106019469587897, guid: 380048e9f1c2b194e8e36201c9df1bad, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5014106019469587897, guid: 380048e9f1c2b194e8e36201c9df1bad, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5014106019469587897, guid: 380048e9f1c2b194e8e36201c9df1bad, type: 3}
