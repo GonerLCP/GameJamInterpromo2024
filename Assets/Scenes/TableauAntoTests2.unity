@@ -338,11 +338,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7945424149395986364, guid: 94c3132b515aac1468a6eb3321d1b0af, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -570
+      value: -636
       objectReference: {fileID: 0}
     - target: {fileID: 7945424149395986364, guid: 94c3132b515aac1468a6eb3321d1b0af, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 125
+      value: 68
       objectReference: {fileID: 0}
     - target: {fileID: 7945424149395986364, guid: 94c3132b515aac1468a6eb3321d1b0af, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1216,6 +1216,7 @@ GameObject:
   - component: {fileID: 549556098}
   - component: {fileID: 549556097}
   - component: {fileID: 549556099}
+  - component: {fileID: 549556100}
   m_Layer: 5
   m_Name: Cadre
   m_TagString: Untagged
@@ -1310,6 +1311,23 @@ MonoBehaviour:
   croquisLerpDuration: 3
   rucheFinale: {fileID: 385919381985216052, guid: eb9de2de567fb6b4492e56bf375f2f89, type: 3}
   audioSource: {fileID: 1454011775}
+  player: {fileID: 2021139602}
+--- !u!114 &549556100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549556095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21ccaccd36f32be46882bbe2908faef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listeDesCroquis: {fileID: 2055018758}
+  croquis: {fileID: 0}
+  croquisSurLeCadre: 0
+  player: {fileID: 2021139602}
 --- !u!1 &605047660
 GameObject:
   m_ObjectHideFlags: 0
@@ -3486,6 +3504,10 @@ PrefabInstance:
       propertyPath: grabCursor
       value: 
       objectReference: {fileID: 2800000, guid: e47a4d164fc395742891a981a4133f2f, type: 3}
+    - target: {fileID: 7784503417657385105, guid: 4cc7700c936487345a8109b96ad96303, type: 3}
+      propertyPath: croquisSpawn
+      value: 
+      objectReference: {fileID: 549556100}
     - target: {fileID: 7784503417657385105, guid: 4cc7700c936487345a8109b96ad96303, type: 3}
       propertyPath: eraserCursor
       value: 

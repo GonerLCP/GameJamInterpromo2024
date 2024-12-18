@@ -11,6 +11,7 @@ public class EndGameDetector : MonoBehaviour
     private bool tousLesCroquisSontSurLeCalque = true;
     private bool endHasBeenCalled = false;
     private RectTransform cadreRectTransform;
+    public Player player;
 
     private void Start()
     {
@@ -31,7 +32,7 @@ public class EndGameDetector : MonoBehaviour
                 }
             }
 
-            if (tousLesCroquisSontSurLeCalque)
+            if (tousLesCroquisSontSurLeCalque && player.estAttrape == false)
             {
                 endHasBeenCalled = true;
 
