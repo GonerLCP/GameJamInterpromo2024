@@ -14,6 +14,20 @@ public class Tableau : MonoBehaviour
         columns[0].GetComponentInChildren<Button>().interactable = false;
     }
 
+    private void FixedUpdate()
+    {
+        foreach(GameObject column in columns)
+        {
+            if (column.GetComponentInChildren<GridLayoutGroup>().gameObject.GetComponentsInChildren<CroquisScript>().Length > 0){
+                column.GetComponentInChildren<Button>().interactable = false;
+            }
+            else if(columns.Count > 1)
+            {
+                column.GetComponentInChildren<Button>().interactable = true;
+            }
+        }
+    }
+
     // Update is called once per frame
     public void TryToDeleteColumn(GameObject column)
     {

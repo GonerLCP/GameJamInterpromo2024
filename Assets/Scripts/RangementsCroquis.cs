@@ -37,13 +37,13 @@ public class RangementsCroquis : MonoBehaviour
             }
         }
 
-        if (aucunCroquisneSurvoleLaColonne==false && IsMouseHovering())
+        if (aucunCroquisneSurvoleLaColonne)
         {
-            croquisPlaceholder.enabled = true;
+            croquisPlaceholder.enabled = false;
         }
         else
         {
-            croquisPlaceholder.enabled = false;
+            croquisPlaceholder.enabled = true;
         }
     }
 
