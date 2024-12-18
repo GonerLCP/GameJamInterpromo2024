@@ -1,11 +1,7 @@
-using NUnit.Framework;
-using UnityEditor.TerrainTools;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
 
 public class LineGenerator : MonoBehaviour
 {
