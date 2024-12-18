@@ -643,6 +643,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1454011775}
+        m_TargetAssemblyTypeName: SFX, Assembly-CSharp
+        m_MethodName: playButtonClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &453170514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1542,6 +1554,18 @@ MonoBehaviour:
       - m_Target: {fileID: 801598318}
         m_TargetAssemblyTypeName: LineGenerator, Assembly-CSharp
         m_MethodName: ClickButtonDraw
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1454011775}
+        m_TargetAssemblyTypeName: SFX, Assembly-CSharp
+        m_MethodName: playButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2732,6 +2756,7 @@ MonoBehaviour:
   croquisBackToCadre: {fileID: 8300000, guid: 0f0e5f52e3eb3f542b536e6ec60592c9, type: 3}
   beehive: {fileID: 8300000, guid: 967181b2e40638144bc86c15d20d0966, type: 3}
   inputField: {fileID: 8300000, guid: e842495d5ff5e7342acc4ef8e6276345, type: 3}
+  buttonClick: {fileID: 8300000, guid: 0b82b0e7209f9c64dbdd54ac5ce29e16, type: 3}
 --- !u!114 &1463266162 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3371487772062010268, guid: 94c3132b515aac1468a6eb3321d1b0af, type: 3}
@@ -3238,6 +3263,18 @@ MonoBehaviour:
       - m_Target: {fileID: 801598318}
         m_TargetAssemblyTypeName: LineGenerator, Assembly-CSharp
         m_MethodName: ClickButtonEreaser
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1454011775}
+        m_TargetAssemblyTypeName: SFX, Assembly-CSharp
+        m_MethodName: playButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

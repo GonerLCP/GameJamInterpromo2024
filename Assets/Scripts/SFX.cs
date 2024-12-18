@@ -8,6 +8,7 @@ public class SFX : MonoBehaviour
     public AudioClip croquisBackToCadre;
     public AudioClip beehive;
     public AudioClip inputField;
+    public AudioClip buttonClick;
 
     private AudioSource source;
 
@@ -40,5 +41,10 @@ public class SFX : MonoBehaviour
     public void playInputField()
     {
         source.PlayOneShot(inputField);
+    }
+
+    public void playButtonClick()
+    {
+        source.PlayOneShot(buttonClick);
     }
 }
