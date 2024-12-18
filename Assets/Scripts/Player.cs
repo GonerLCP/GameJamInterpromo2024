@@ -12,14 +12,14 @@ using static UnityEngine.GraphicsBuffer;
 public class Player : MonoBehaviour
 {
     private GameObject croquis;
+    public GameObject listeCroquis;
     public bool estAttrape, estAttrapeTampon;
     private bool surLeCadreDrop;
     public bool peutGrab;
     public GameObject target;
     public Canvas canvas;
     private Vector2 offset;
-    public Vector3 coordTP;
-    public Button btn;
+
     [SerializeField]
     private Button[] buttons;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -76,59 +76,64 @@ public class Player : MonoBehaviour
             }
             if (surLeCadreDrop == false)//On sait que c'est nul part on tp sur tpcoord, arbitrairement mis à une valeur dans l'éditeur
             {
-                if (surLeCadreDrop == false) // Si l'objet n'est sur aucun cadre, on le téléporte
+                if (croquis == null || target == null) return;
+
+                Vector2 moveTo;
+
+                // Étape 1 : Position cible en espace écran
+                Vector3 screenPoint = Camera.main.WorldToScreenPoint(target.transform.position);
+
+                // Étape 2 : Canevas racine
+                RectTransform canvasRectTransform = canvas.transform as RectTransform;
+
+                // Étape 3 : Convertir en espace local du canevas racine
+                bool validPoint = RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                    canvasRectTransform,
+                    screenPoint,
+                    canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : Camera.main,
+                    out moveTo
+                );
+
+                if (!validPoint)
                 {
-                    if (croquis == null || target == null) return;
+                    Debug.LogError("La conversion de la position a échoué !");
+                    return;
+                }
 
-                    Vector2 moveTo;
+                Debug.Log($"Local Point in Canvas: {moveTo}");
 
-                    // Étape 1 : Position cible en espace écran
-                    Vector3 screenPoint = Camera.main.WorldToScreenPoint(target.transform.position);
+                // Étape 4 : Ajuster l'espace local pour l'objet croquis
+                RectTransform croquisParent = croquis.transform.parent as RectTransform;
 
-                    // Étape 2 : Canevas racine
-                    RectTransform canvasRectTransform = canvas.transform as RectTransform;
+                if (croquisParent != null)
+                {
+                    // Convertir du canevas racine à l'espace local du parent de croquis
+                    Vector3 worldPosition = canvasRectTransform.TransformPoint(moveTo);
+                    Vector2 localPointInCroquisParent;
 
-                    // Étape 3 : Convertir en espace local du canevas racine
-                    bool validPoint = RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                        canvasRectTransform,
-                        screenPoint,
+                    RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                        croquisParent,
+                        Camera.main.WorldToScreenPoint(worldPosition),
                         canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : Camera.main,
-                        out moveTo
+                        out localPointInCroquisParent
                     );
 
-                    if (!validPoint)
-                    {
-                        Debug.LogError("La conversion de la position a échoué !");
-                        return;
-                    }
+                    // Appliquer la position dans l'espace local du parent de croquis
+                    croquis.GetComponent<RectTransform>().anchoredPosition = localPointInCroquisParent;
 
-                    Debug.Log($"Local Point in Canvas: {moveTo}");
+                    //Modifier le croquis comme avant car il à été resize par le tableau
+                    croquis.GetComponent<RectTransform>().anchorMin = new Vector2(0.5f, 0.5f);
+                    croquis.GetComponent<RectTransform>().anchorMax = new Vector2(0.5f, 0.5f);
+                    croquis.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
+                    croquis.GetComponent<RectTransform>().sizeDelta = new Vector2(509.34f, 509.34f);
 
-                    // Étape 4 : Ajuster l'espace local pour l'objet croquis
-                    RectTransform croquisParent = croquis.transform.parent as RectTransform;
-
-                    if (croquisParent != null)
-                    {
-                        // Convertir du canevas racine à l'espace local du parent de croquis
-                        Vector3 worldPosition = canvasRectTransform.TransformPoint(moveTo);
-                        Vector2 localPointInCroquisParent;
-
-                        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-                            croquisParent,
-                            Camera.main.WorldToScreenPoint(worldPosition),
-                            canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : Camera.main,
-                            out localPointInCroquisParent
-                        );
-
-                        // Appliquer la position dans l'espace local du parent de croquis
-                        croquis.GetComponent<RectTransform>().anchoredPosition = localPointInCroquisParent;
-
-                        Debug.Log($"Position dans le parent de croquis : {localPointInCroquisParent}");
-                    }
-                    else
-                    {
-                        Debug.LogError("Croquis n'a pas de parent RectTransform !");
-                    }
+                    //On remet le croquis enfant de la liste
+                    croquis.transform.parent = listeCroquis.transform;
+                    Debug.Log($"Position dans le parent de croquis : {localPointInCroquisParent}"); ;
+                }
+                else
+                {
+                    Debug.LogError("Croquis n'a pas de parent RectTransform !");
                 }
             }
         }
@@ -189,6 +194,11 @@ public class Player : MonoBehaviour
 
         // Réinitialise si aucun objet correspondant n'est trouvé
         croquis = null;
+    }
+
+    private void NewCroquis()
+    {
+
     }
 
     public void OnButtonClicked(Button clickedButton)
