@@ -100,6 +100,7 @@ GameObject:
   - component: {fileID: 2566541045969357888}
   - component: {fileID: 8038260899705508624}
   - component: {fileID: 8101067290209833734}
+  - component: {fileID: 6146269522892264932}
   m_Layer: 5
   m_Name: Ruche Finie
   m_TagString: Untagged
@@ -202,6 +203,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &6146269522892264932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385919381985216052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee960b58490059b48b8b72781ba902df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &714584693807555795
 GameObject:
   m_ObjectHideFlags: 0
