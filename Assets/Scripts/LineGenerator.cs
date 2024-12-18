@@ -16,7 +16,6 @@ public class LineGenerator : MonoBehaviour
     Line activeLine;
 
     private GameObject croquis;
-    CroquisScript croquisScript;
 
     // Update is called once per frame
     void Update()
@@ -37,29 +36,28 @@ public class LineGenerator : MonoBehaviour
 
         // Filtrer les résultats pour le calque d'UI (vérifie si layer 5 est correct)
         var uiResults = results.Where(r => r.gameObject.layer == LayerMask.NameToLayer("UI")).ToList();
-
+        
+        
+        croquis = null;
+        dansLeCadre = false;
+        dansLeCroquis = false;
         foreach (var result in uiResults)
         {
+            if (result.gameObject.name == "Cadre")
+            {
+                dansLeCadre = true;
+            }
             if (result.gameObject.tag == "Croquis") //Si trouvé l'objet Croquis, alors on renvoie le gameObject, potentiellement conflit avec d'autres gameobjects
             {
+                dansLeCroquis = true;
                 croquis = result.gameObject;
-                croquisScript = result.gameObject.GetComponent<CroquisScript>();
-                break;
-            }
-            else
-            {
-                croquis = null;
-                croquisScript = null;
             }
         }
     }
     private void DessinLigne()
     {
-        //Si le croquis n'a pas été détecté, on ne peux pas dessiner
-        if (croquisScript == null) { activeLine = null; return; }
-
         //Trace la ligne si l'on est bien sur le croquis
-        if (Input.GetMouseButtonDown(0) && croquisScript.estSurCadre == true)
+        if (Input.GetMouseButtonDown(0) && dansLeCadre == true)
         {
             GameObject newLine = Instantiate(linePrefab);
             activeLine = newLine.GetComponent<Line>();
@@ -67,7 +65,7 @@ public class LineGenerator : MonoBehaviour
         }
 
         //Desactive le dessin si on relache le click ou qu'on sors
-        if (Input.GetMouseButtonUp(0) || croquisScript.estSurCadre == false)
+        if (Input.GetMouseButtonUp(0) || dansLeCroquis == false)
         {
             activeLine = null;
         }
