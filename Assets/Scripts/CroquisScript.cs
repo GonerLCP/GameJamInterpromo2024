@@ -9,21 +9,17 @@ using UnityEngine.EventSystems;
 public class CroquisScript : MonoBehaviour
 {
     public bool estSurCadre;
-    public bool estDansCroquis;
     private RectTransform rectTransform;
-    private Canvas canvas;
 
     public bool estAttrape = false;
 
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
-        canvas = GetComponentInParent<Canvas>();
     }
     void Update()
     {
         DetectUIElement();
-        MoveObject();
     }
 
     void DetectUIElement()
@@ -50,7 +46,7 @@ public class CroquisScript : MonoBehaviour
             foreach (var result in uiResults)
             {
                 //Chercher dans les results si le cadre y est
-                Debug.Log($"Element trouvé : {result.gameObject.name}");
+                //Debug.Log($"Element trouvé : {result.gameObject.name}");
                 if (result.gameObject.name == "Cadre")
                 {
                     estSurCadre = true;
@@ -62,39 +58,6 @@ public class CroquisScript : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            Debug.Log("Aucun élément UI détecté au-dessus.");
-        }
     }
 
-    void MoveObject()
-    {
-        if (!estDansCroquis) { return; }
-        if(!Input.GetMouseButton(1)) { estAttrape = false; return; }
-        Vector2 mousePosition;
-        estAttrape = true;
-
-        // Convertit la position de la souris dans l'espace du RectTransform parent
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(
-            rectTransform.parent as RectTransform,
-            Input.mousePosition,
-            canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : Camera.main,
-            out mousePosition
-        );
-
-        // Met à jour la position de l'image
-        rectTransform.localPosition = mousePosition;
-    }
-
-    //Fonctions pour l'eventTrigger
-    public void InCroquis()
-    {
-        estDansCroquis = true;
-    }
-
-    public void OutCroquis()
-    {
-        estDansCroquis = false;
-    }
 }
