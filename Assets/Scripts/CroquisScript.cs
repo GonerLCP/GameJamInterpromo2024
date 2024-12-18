@@ -58,4 +58,9 @@ public class CroquisScript : MonoBehaviour
         }
     }
 
+
+    private void OnTransformParentChanged()
+    {
+        print("Parent du croquis "+name+" modifié");
+    }
 }

@@ -20,13 +20,22 @@ public class Player : MonoBehaviour
     public Canvas canvas;
     private Vector2 offset;
 
+    public Texture2D grabCursor;
+    public Texture2D penCursor;
+    public Texture2D eraserCursor;
+
     [SerializeField]
     private Button[] buttons;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         peutGrab = false;
-        SetAllButtonsInteractable();
+
+        //Je supprime lui pour que le crayon soit non interactable par défaut
+        //SetAllButtonsInteractable();
+
+        //Sélectionner le crayon par défaut
+        ClickButtonDraw();
     }
 
     // Update is called once per frame
@@ -224,10 +233,18 @@ public class Player : MonoBehaviour
     public void ClickButtonGrab()
     {
         peutGrab = true;
+        Cursor.SetCursor(grabCursor, new Vector2(0, grabCursor.height), CursorMode.ForceSoftware);
     }
 
-    public void ClickButtonDrawAndEreaser()
+    public void ClickButtonDraw()
     {
         peutGrab = false;
+        Cursor.SetCursor(penCursor, new Vector2(0, penCursor.height), CursorMode.ForceSoftware);
+    }
+
+    public void ClickButtonEreaser()
+    {
+        peutGrab = false;
+        Cursor.SetCursor(eraserCursor, new Vector2(0, eraserCursor.height), CursorMode.ForceSoftware);
     }
 }

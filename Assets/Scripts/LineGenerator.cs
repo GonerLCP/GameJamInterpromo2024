@@ -24,6 +24,9 @@ public class LineGenerator : MonoBehaviour
     private void Start()
     {
         peutDessiner = false; peutEffacer = false;
+
+        //Sélectionner le crayon par défaut
+        ClickButtonDraw();
     }
 
     // Update is called once per frame
