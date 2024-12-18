@@ -11,8 +11,6 @@ public class CroquisScript : MonoBehaviour
     public bool estSurCadre;
     private RectTransform rectTransform;
 
-    public bool estAttrape = false;
-
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
