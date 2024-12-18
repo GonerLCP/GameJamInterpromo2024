@@ -10,13 +10,15 @@ public class CroquisScript : MonoBehaviour
 {
     public bool estSurCadre;
     private RectTransform rectTransform;
-
+    public bool estAttrapeCroquis;
     private void Start()
     {
+        estAttrapeCroquis = false;
         rectTransform = GetComponent<RectTransform>();
     }
     void Update()
     {
+        print(estAttrapeCroquis);   
         DetectUIElement();
     }
 

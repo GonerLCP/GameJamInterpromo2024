@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1474575147134120162}
   - component: {fileID: 424253373357275215}
   - component: {fileID: 6673733552601480543}
+  - component: {fileID: 2246571077347229363}
   m_Layer: 0
   m_Name: Line
   m_TagString: Line
@@ -153,3 +154,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineRend: {fileID: 424253373357275215}
+--- !u!114 &2246571077347229363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 667226485219627929}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e72161678a237a14c85b51c5e5b01004, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialWidth: 509.34
+  initialHeight: 509.34

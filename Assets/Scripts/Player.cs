@@ -151,10 +151,11 @@ public class Player : MonoBehaviour
     void MoveObject()
     {
         if (croquis == null) return;
-        if (!Input.GetMouseButton(0) || !peutGrab) { estAttrape = false; return; }
+        if (!Input.GetMouseButton(0) || !peutGrab) { estAttrape = false; croquis.GetComponent<CroquisScript>().estAttrapeCroquis = false; return; }
         croquis.transform.SetAsLastSibling();
         Vector2 mousePosition;
         estAttrape = true;
+        croquis.GetComponent<CroquisScript>().estAttrapeCroquis = true;
 
         // Convertit la position de la souris dans l'espace du RectTransform parent
         RectTransformUtility.ScreenPointToLocalPointInRectangle(
