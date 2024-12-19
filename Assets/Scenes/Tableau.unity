@@ -1216,6 +1216,7 @@ GameObject:
   - component: {fileID: 549556098}
   - component: {fileID: 549556097}
   - component: {fileID: 549556099}
+  - component: {fileID: 549556100}
   m_Layer: 5
   m_Name: Cadre
   m_TagString: Untagged
@@ -1310,6 +1311,23 @@ MonoBehaviour:
   croquisLerpDuration: 3
   rucheFinale: {fileID: 385919381985216052, guid: eb9de2de567fb6b4492e56bf375f2f89, type: 3}
   audioSource: {fileID: 1454011775}
+  player: {fileID: 0}
+--- !u!114 &549556100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549556095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21ccaccd36f32be46882bbe2908faef1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listeDesCroquis: {fileID: 2055018758}
+  croquis: {fileID: 0}
+  croquisSurLeCadre: 0
+  player: {fileID: 2021139602}
 --- !u!1 &605047660
 GameObject:
   m_ObjectHideFlags: 0
@@ -3487,6 +3505,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2800000, guid: e47a4d164fc395742891a981a4133f2f, type: 3}
     - target: {fileID: 7784503417657385105, guid: 4cc7700c936487345a8109b96ad96303, type: 3}
+      propertyPath: croquisSpawn
+      value: 
+      objectReference: {fileID: 549556100}
+    - target: {fileID: 7784503417657385105, guid: 4cc7700c936487345a8109b96ad96303, type: 3}
       propertyPath: eraserCursor
       value: 
       objectReference: {fileID: 2800000, guid: 07bc9ee9d26e5324f97a2c96d71ed48d, type: 3}
@@ -3535,6 +3557,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2055018759}
+  - component: {fileID: 2055018760}
   m_Layer: 5
   m_Name: ListeDesCroquis
   m_TagString: Untagged
@@ -3575,6 +3598,33 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2055018760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055018758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb87cc88c69f5a44187efd4f20a3ed00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  croquisArray:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1001 &2061893063
 PrefabInstance:
   m_ObjectHideFlags: 0

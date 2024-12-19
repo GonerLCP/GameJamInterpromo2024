@@ -6,32 +6,41 @@ public class RangementsCroquis : MonoBehaviour
 {
     public Image croquisPlaceholder;
     public TMP_InputField inputText;
-    public CroquisScript[] croquisArray = new CroquisScript[14];
+    public Color hoverColor;
 
+    private CroquisScript[] croquisArray;
+    private GameObject croquisListe;
     private RectTransform thisRectTransform;
+    private Image image;
+    private Color imageColor;
     private bool aucunCroquisneSurvoleLaColonne = true;
 
     private void Start()
     {
         croquisPlaceholder.enabled = false;
         inputText.text = "";
+        image = gameObject.GetComponent<Image>();
+        imageColor = image.color;
 
         foreach (CroquisScript croquis in GetComponentsInChildren<CroquisScript>())
         {
             Destroy(croquis.gameObject);
         }
 
+        croquisListe = GameObject.Find("ListeDesCroquis");
+        croquisArray = croquisListe.GetComponent<ListeDesCroquis>().croquisArray;
+
         thisRectTransform = GetComponent<RectTransform>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         aucunCroquisneSurvoleLaColonne = true;
 
         // Vérifier si un objet de croquisArray survole l'élément
         foreach (CroquisScript croquis in croquisArray)
         {
-            if (croquis !=null && IsHoveringOver(croquis.GetComponent<RectTransform>()))
+            if (croquis != null && IsMouseHovering() && croquis.GetComponent<CroquisScript>().estAttrapeCroquis && IsHoveringOver(croquis.GetComponent<RectTransform>()))
             {
                 aucunCroquisneSurvoleLaColonne = false;
             }
@@ -40,10 +49,12 @@ public class RangementsCroquis : MonoBehaviour
         if (aucunCroquisneSurvoleLaColonne)
         {
             croquisPlaceholder.enabled = false;
+            image.color = imageColor;
         }
         else
         {
             croquisPlaceholder.enabled = true;
+            image.color = hoverColor;
         }
     }
 

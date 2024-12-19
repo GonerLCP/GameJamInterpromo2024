@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
 
     public Canvas canvas;
 
+    public SFX audioSource;
+
     public CroquisSpawn croquisSpawn;
 
     public Texture2D grabCursor;
@@ -286,6 +288,7 @@ public class Player : MonoBehaviour
 
             //On remet le croquis enfant de la liste
             croquis.transform.parent = listeCroquis.transform;
+            
             Debug.Log($"Position dans le parent de croquis : {localPointInCroquisParent}"); ;
         }
         else

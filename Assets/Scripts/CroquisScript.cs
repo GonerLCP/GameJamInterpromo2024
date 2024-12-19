@@ -1,3 +1,6 @@
+using NUnit.Framework;
+using UnityEditor.TerrainTools;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -8,6 +11,8 @@ public class CroquisScript : MonoBehaviour
     public bool estSurCadre;
     private RectTransform rectTransform;
     public bool estAttrapeCroquis;
+    public SFX audioSource;
+    private int nFramesHasBeenAlive=0;
     private void Start()
     {
         estAttrapeCroquis = false;
@@ -17,6 +22,11 @@ public class CroquisScript : MonoBehaviour
     {
         print(estAttrapeCroquis);   
         DetectUIElement();
+    }
+
+    private void FixedUpdate()
+    {
+        nFramesHasBeenAlive++;
     }
 
     void DetectUIElement()
@@ -60,6 +70,18 @@ public class CroquisScript : MonoBehaviour
 
     private void OnTransformParentChanged()
     {
-        print("Parent du croquis "+name+" modifié");
+        if (GetComponentInParent<ListeDesCroquis>())
+        {
+            audioSource.playCroquisBackToCadre();
+            print("liste");
+        }
+        else if (GetComponentInParent<RangementsCroquis>())
+        {
+            print("rangements");
+            if (nFramesHasBeenAlive > 60)
+            {
+                audioSource.playCroquisCategorized();
+            }
+        }
     }
 }

@@ -59,4 +59,5 @@ public class CroquisSpawn : MonoBehaviour
         croquis = listeDesCroquis.transform.GetChild(Random.Range(0, numberOfChild)).gameObject;
         player.TeleporterSurCadre(croquis);
     }
+
 }
